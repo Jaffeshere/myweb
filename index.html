@@ -75,6 +75,8 @@
     box-sizing: border-box;
     overflow-wrap: break-word;
     word-break: break-word;
+    margin-top: 1rem;
+    border: 1px solid #ddd;
     padding: 0 0.5rem;
     overflow-y: auto;
   }
@@ -181,7 +183,7 @@
 
       <form onsubmit="submitComment(); return false;">
         <textarea id="commentInput" placeholder="寫下你的留言吧！"></textarea>
-        <button onclick="submitComment()">送出留言</button>
+        <button type="submit">送出留言</button>
       </form>
          
   <div id="commentsContainer">
