@@ -216,17 +216,19 @@
   }
 
   // 實時監聽留言更新
-  db.collection("comments")
-    .orderBy("timestamp", "desc")
-    .onSnapshot(snapshot => {
-      const container = document.getElementById("commentsContainer");
-      container.innerHTML = "";
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        const div = document.createElement("div");
-        div.className = "comment";
-        div.textContent = data.content;
-        container.appendChild(div);
+  if (!window.hasSetupListener) {
+    window.hasSetupListener = true;
+     db.collection("comments")
+      .orderBy("timestamp", "desc")
+      .onSnapshot(snapshot => {
+        const container = document.getElementById("commentsContainer");
+        container.innerHTML = "";
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const div = document.createElement("div");
+          div.className = "comment";
+          div.textContent = data.content;
+          container.appendChild(div);
       });
     });
 </script>
