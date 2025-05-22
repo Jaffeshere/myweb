@@ -217,44 +217,48 @@
   const db = firebase.firestore();
 
   // 避免重複監聽（確保只初始化一次）
-  let unsubscribe;
+ let unsubscribe;
 
-  window.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById("commentsContainer");
-    container.innerHTML = "";
+window.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("commentsContainer");
 
-    if (typeof unsubscribe === "function") {
-      unsubscribe(); // 如果已經監聽過，先取消
-    }
+  if (typeof unsubscribe === "function") {
+    unsubscribe();
+  }
 
-    unsubscribe = db.collection("comments")
-      .orderBy("timestamp", "desc")
-      .onSnapshot(snapshot => {
-        container.innerHTML = ""; // 清空再重新渲染
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          const div = document.createElement("div");
-          div.className = "comment";
-          div.textContent = data.content;
-          container.appendChild(div);
+  unsubscribe = db.collection("comments")
+    .orderBy("timestamp", "desc")
+    .onSnapshot(snapshot => {
+      container.innerHTML = "";
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const div = document.createElement("div");
+        div.className = "comment";
+        div.textContent = data.content;
+        container.appendChild(div);
         });
       });
-  }); // <--- 這裡補上括號與分號，結束事件綁定函式
+  }); 
 
   // 提交留言函式
   function submitComment() {
-    const content = document.getElementById("commentInput").value.trim();
-    if (content) {
-      db.collection("comments").add({
-        content: content,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      }).then(() => {
-        document.getElementById("commentInput").value = "";
-      }).catch((error) => {
-        console.error("留言新增錯誤：", error);
+  const content = document.getElementById("commentInput").value.trim();
+  if (!content) return;
+
+  // 禁用按鈕，避免重複點擊
+  const btn = document.querySelector('form button[type="submit"]');
+  btn.disabled = true;
+
+  db.collection("comments").add({
+    content,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  }).then(() => {
+    document.getElementById("commentInput").value = "";
+  }).finally(() => {
+    btn.disabled = false;
       });
     }
-  }
+  
 </script>
 
 </body>
