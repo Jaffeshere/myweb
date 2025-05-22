@@ -237,7 +237,7 @@
           container.appendChild(div);
         });
       });
-  }
+  }); // <--- 這裡補上括號與分號，結束事件綁定函式
 
   // 提交留言函式
   function submitComment() {
@@ -248,11 +248,12 @@
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
       }).then(() => {
         document.getElementById("commentInput").value = "";
+      }).catch((error) => {
+        console.error("留言新增錯誤：", error);
       });
     }
   }
 </script>
-
 
 </body>
 </html>
