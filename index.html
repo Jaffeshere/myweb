@@ -90,6 +90,18 @@
       font-family: 'Noto Sans TC', sans-serif;
     }
 
+    #submitButton {
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: none;
+      background-color: #4a90e2;
+      color: white;
+      cursor: pointer;
+    }
+
+    
     .post-list {
       margin-top: 1rem;
     }
@@ -203,14 +215,20 @@
   const db = firebase.firestore();
 
   // 避免重複監聽（確保只初始化一次）
-  if (!window.hasSetupListener) {
-    window.hasSetupListener = true;
+  let unsubscribe;
 
-    db.collection("comments")
+  window.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("commentsContainer");
+    container.innerHTML = "";
+
+    if (typeof unsubscribe === "function") {
+      unsubscribe(); // 如果已經監聽過，先取消
+    }
+
+    unsubscribe = db.collection("comments")
       .orderBy("timestamp", "desc")
       .onSnapshot(snapshot => {
-        const container = document.getElementById("commentsContainer");
-        container.innerHTML = ""; // 清空舊留言再渲染
+        container.innerHTML = ""; // 清空再重新渲染
         snapshot.forEach(doc => {
           const data = doc.data();
           const div = document.createElement("div");
