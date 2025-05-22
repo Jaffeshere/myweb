@@ -152,11 +152,14 @@
       </div>
     </section>
 
-    <section class="section">
-      <h2>留言牆（靜態模擬）</h2>
-      <div class="comment">🌿 訪客A：很喜歡這個版面，清新又舒服！</div>
-      <div class="comment">🌿 訪客B：期待更多內容更新～</div>
-    </section>
+   <section class="section">
+      <h2>留言牆</h2>
+     
+        <textarea id="commentInput" placeholder="寫下你的留言吧！"></textarea>
+        <button onclick="submitComment()">送出留言</button>
+  
+  <div id="commentsContainer"></div>
+</section>
 
   </main>
 
@@ -182,6 +185,36 @@
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+// 提交留言
+  function submitComment() {
+    const content = document.getElementById("commentInput").value.trim();
+    if (content) {
+      db.collection("comments").add({
+        content: content,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(() => {
+        document.getElementById("commentInput").value = "";
+      });
+    }
+  }
+
+  // 監聽留言資料變化
+  db.collection("comments")
+    .orderBy("timestamp", "desc")
+    .onSnapshot(snapshot => {
+      const container = document.getElementById("commentsContainer");
+      container.innerHTML = "";
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const div = document.createElement("div");
+        div.className = "comment";
+        div.textContent = data.content;
+        container.appendChild(div);
+      });
+    });
+    
 </script>
 
 </body>
