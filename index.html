@@ -1,25 +1,124 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的個人網站</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jaffe 的個人空間</title>
   <style>
     body {
-      font-family: sans-serif;
-      max-width: 600px;
-      margin: 3rem auto;
-      padding: 1rem;
-      line-height: 1.6;
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: #f5f7f4;
+      color: #2f3e34;
+      margin: 0;
+      padding: 0;
     }
-    h1 {
-      color: #2c3e50;
+
+    header {
+      background-color: #dbeadf;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .section {
+      margin-bottom: 2.5rem;
+      padding: 1.5rem;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(80, 100, 90, 0.05);
+    }
+
+    .section h2 {
+      margin-top: 0;
+      color: #446655;
+      font-size: 1.3rem;
+    }
+
+    .links a {
+      display: inline-block;
+      margin-right: 1rem;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem 0.8rem;
+      background-color: #e2f0e9;
+      color: #2f3e34;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+
+    .links a:hover {
+      background-color: #cce0d5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #999;
     }
   </style>
 </head>
 <body>
-  <h1>哈囉，我是 Jaffe！</h1>
-  <p>歡迎來到我的 GitHub 個人網站，這是我實驗性的網站首頁。</p>
-  <p>🚀 建立於 GitHub Pages！</p>
+
+  <header>
+    <h1>哈囉，我是 Jaffe</h1>
+    <p>這是我寫作、思考與連結的空間</p>
+  </header>
+
+  <main class="container">
+
+    <section class="section">
+      <h2>自我介紹</h2>
+      <p>
+        我是 Jaffe，興趣包括：懷疑社會、質疑自己，以及重複編輯這段自介。
+        目前的日常思考重心是：認識世界的運作，然後想像不同的可能性，
+        這個網站是我堆積片段思考與感受的角落，
+        像一張窗邊便條紙，隨時都可能更新。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>連結</h2>
+      <div class="links">
+        <a href="https://vocus.cc/user/@Jaffe" target="_blank">方格子文章集</a>
+        <a href="https://www.instagram.com/jiahuei_la_/" target="_blank">Instagram</a>
+        <a href="https://linktr.ee/Jaffe.life" target="_blank">Linktree / 其他社群</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>我的三重身分</h2>
+      <p>
+        - 當一個迷茫掙扎的大學生<br>
+        - 演一個冷漠疏離的台北人<br>
+        - 做一個關心議題的地球人
+      </p>
+    </section>
+
+     <section class="section">
+      <h2>我正在做的事</h2>
+      <p>
+        - 森林系就讀中<br>
+        - LFT思辨講師培訓中<br>
+        - 學術世界迷路中
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2025 Jaffe ｜本站為學習與練習用途
+  </footer>
+
 </body>
 </html>
