@@ -180,28 +180,26 @@
     © 2025 Jaffe ｜本站為個人學習與交流用途
   </footer>
 
-  <script type="module">
-  // Import the functions you need from the SDKs you need
- <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
- <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+  <!-- 載入 Firebase v8 SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-  // Your web app's Firebase configuration
+<script>
+  // Firebase 設定
   const firebaseConfig = {
     apiKey: "AIzaSyCiLok6LzotXqPMKBj07ampugFtlBtdWcM",
     authDomain: "myfirstintroweb.firebaseapp.com",
     projectId: "myfirstintroweb",
-    storageBucket: "myfirstintroweb.firebasestorage.app",
+    storageBucket: "myfirstintroweb.appspot.com",
     messagingSenderId: "587649490529",
     appId: "1:587649490529:web:d028a44e2ca0c66a925420"
   };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+  // 初始化 Firebase
+  firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-// 提交留言
+  // 提交留言
   function submitComment() {
     const content = document.getElementById("commentInput").value.trim();
     if (content) {
@@ -214,7 +212,7 @@
     }
   }
 
-  // 監聽留言資料變化
+  // 實時監聽留言更新
   db.collection("comments")
     .orderBy("timestamp", "desc")
     .onSnapshot(snapshot => {
@@ -228,8 +226,8 @@
         container.appendChild(div);
       });
     });
-    
 </script>
+
 
 </body>
 </html>
