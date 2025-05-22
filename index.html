@@ -202,7 +202,26 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  // 提交留言
+  // 避免重複監聽（確保只初始化一次）
+  if (!window.hasSetupListener) {
+    window.hasSetupListener = true;
+
+    db.collection("comments")
+      .orderBy("timestamp", "desc")
+      .onSnapshot(snapshot => {
+        const container = document.getElementById("commentsContainer");
+        container.innerHTML = ""; // 清空舊留言再渲染
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const div = document.createElement("div");
+          div.className = "comment";
+          div.textContent = data.content;
+          container.appendChild(div);
+        });
+      });
+  }
+
+  // 提交留言函式
   function submitComment() {
     const content = document.getElementById("commentInput").value.trim();
     if (content) {
@@ -214,21 +233,6 @@
       });
     }
   }
-
-  // 實時監聽留言更新
-   db.collection("comments")
-    .orderBy("timestamp", "desc")
-     .onSnapshot(snapshot => {
-       const container = document.getElementById("commentsContainer");
-       container.innerHTML = "";
-       snapshot.forEach(doc => {
-         const data = doc.data();
-         const div = document.createElement("div");
-         div.className = "comment";
-         div.textContent = data.content;
-         container.appendChild(div);
-      });
-    });
 </script>
 
 
