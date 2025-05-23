@@ -164,20 +164,29 @@
 .topic-card:hover {
   transform: translateY(-4px);
 }
+
+.main-layout {
+  display: flex;
+  align-items: flex-start;
+  padding: 2rem 4%;
+  gap: 2rem;
+}
+
+.left-column {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.right-column {
+  flex: 1;
+  min-width: 220px;
+}
     
   </style>
 </head>
 <body>
-
-  <nav>
-  <ul>
-    <li><a href="soceye.html">社會學之眼</a></li>
-    <li><a href="ecoeye.html">生態之眼</a></li>
-    <li><a href="studenteye.html">大學生之眼</a></li>
-    <li><a href="travelereye.html">旅人之眼</a></li>
-    <li><a href="worldeye.html">世界之眼</a></li>
-  </ul>
-</nav>
 
   <header>
     <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="banner image" class="banner" />
@@ -185,9 +194,10 @@
     <p>這是我寫作、思考與連結的空間</p>
   </header>
 
-  <main class="container">
+  <main class="main-layout">
+  <div class="left-column">
 
-    <section class="section">
+    <section class="left-section">
       <h2>自我介紹</h2>
       <p>
         嗨，我是 Jaffe <br>
@@ -197,7 +207,7 @@
       </p>
     </section>
 
-    <section class="section">
+    <section class="left-section">
       <h2>連結</h2>
       <div class="links">
         <a href="https://vocus.cc/user/@Jaffe" target="_blank">方格子文章集</a>
@@ -206,7 +216,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="left-section">
       <h2>我正在做的事</h2>
       <p>
         - 當一個迷茫掙扎的大學生<br>
@@ -215,7 +225,7 @@
       </p>
     </section>
 
-    <section class="section">
+    <section class="left-section">
       <h2>近況更新牆（靜態模擬）</h2>
       <div class="post-list">
         <div class="post">2025.05.22 今天和 ChatGPT 用vibe coding搭建個人網站 </div>
@@ -223,7 +233,7 @@
       </div>
     </section>
 
-   <section class="section">
+   <section class="left-section">
       <h2>留言牆</h2>
 
       <form onsubmit="submitComment(); return false;">
@@ -236,7 +246,8 @@
   </div>
 </section>
 
-    <section class="topic-section">
+ <aside class="right-column">
+ <section class="right-section">
   <h2>議題探索</h2>
   <div class="topic-container">
     <a class="topic-card" href="society.html">社會學之眼</a>
