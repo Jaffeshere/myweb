@@ -132,18 +132,23 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 
 <script>
-  // 初始化 Firebase
- const firebaseConfig = {
-    apiKey: "AIzaSyCiLok6LzotXqPMKBj07ampugFtlBtdWcM",
-    authDomain: "myfirstintroweb.firebaseapp.com",
-    projectId: "myfirstintroweb",
-    storageBucket: "myfirstintroweb.appspot.com",
-    messagingSenderId: "587649490529",
-    appId: "1:587649490529:web:d028a44e2ca0c66a925420"
-  };
+  // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCiLok6LzotXqPMKBj07ampugFtlBtdWcM",
+  authDomain: "myfirstintroweb.firebaseapp.com",
+  projectId: "myfirstintroweb",
+  storageBucket: "myfirstintroweb.firebasestorage.app",
+  messagingSenderId: "587649490529",
+  appId: "1:587649490529:web:d028a44e2ca0c66a925420"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
   // 監聽留言並顯示
   const container = document.getElementById("commentsContainer");
@@ -170,10 +175,11 @@
     const content = document.getElementById("commentInput").value.trim();
     if (!content) return;
 
-    db.collection("comments").add({
-      content,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    }).then(() => {
+    db.collection("comments_society").add({
+  content,
+  timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  });
+    .then(() => {
       document.getElementById("commentInput").value = "";
     });
   }
