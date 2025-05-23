@@ -68,6 +68,16 @@
       border-left: 4px solid #d0e9d2;
     }
 
+    .comment {
+      background-color: #f2f2f2;
+      border-left: 4px solid #cde5d3;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.8rem;
+      word-break: break-word;
+    }
+
+
     @media (max-width: 768px) {
       body {
         flex-direction: column;
@@ -114,6 +124,59 @@
     </div>
   </div>
 
-  <!-- Firebase SDK 和留言程式碼請根據你原本的版本掛載 -->
+  <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+<script>
+  // 初始化 Firebase
+ const firebaseConfig = {
+    apiKey: "AIzaSyCiLok6LzotXqPMKBj07ampugFtlBtdWcM",
+    authDomain: "myfirstintroweb.firebaseapp.com",
+    projectId: "myfirstintroweb",
+    storageBucket: "myfirstintroweb.appspot.com",
+    messagingSenderId: "587649490529",
+    appId: "1:587649490529:web:d028a44e2ca0c66a925420"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // 監聽留言並顯示
+  const container = document.getElementById("commentsContainer");
+
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      db.collection("comments")
+        .orderBy("timestamp", "desc")
+        .onSnapshot(snapshot => {
+          container.innerHTML = "";
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            const div = document.createElement("div");
+            div.className = "comment";
+            div.textContent = data.content;
+            container.appendChild(div);
+          });
+        });
+    }
+  });
+
+  // 提交留言
+  function submitComment() {
+    const content = document.getElementById("commentInput").value.trim();
+    if (!content) return;
+
+    db.collection("comments").add({
+      content,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+      document.getElementById("commentInput").value = "";
+    });
+  }
+</script>
+
+  
 </body>
 </html>
