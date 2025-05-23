@@ -306,14 +306,14 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-firebase.auth().onAuthStateChanged(user => {
-  if (!user) {
+//firebase.auth().onAuthStateChanged(user => {
+//  if (!user) {
     // 沒登入就自動匿名登入
-    firebase.auth().signInAnonymously().catch(error => {
-      console.error("匿名登入失敗", error);
-    });
-  }
-});
+ //   firebase.auth().signInAnonymously().catch(error => {
+     // console.error("匿名登入失敗", error);
+//    });
+//  }
+//});
   
   // 避免重複監聽（確保只初始化一次）
  let unsubscribe;
