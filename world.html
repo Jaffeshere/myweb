@@ -2,10 +2,191 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>世界之眼</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jaffe的 世界之眼</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", sans-serif;
+      background-color: #fafafa;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 200px;
+      background-color: #f2f2f2;
+      padding: 1rem;
+      border-right: 2px solid #dbeada;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .keyword {
+      background-color: #e7f1e7;
+      border-left: 4px solid #b4dab5;
+      margin-bottom: 0.8rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: #555;
+      font-size: 1rem;
+    }
+
+    .issue-image {
+      max-width: 100%;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+    }
+
+    .comment-box {
+      margin-top: 3rem;
+      background-color: #f8f8f8;
+      padding: 1rem;
+      border-radius: 12px;
+      border-left: 4px solid #d0e9d2;
+    }
+
+    .comment {
+      background-color: #f2f2f2;
+      border-left: 4px solid #cde5d3;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.8rem;
+      word-break: break-word;
+    }
+
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 2px solid #dbeada;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>世界之眼</h1>
-  <p>這是世界之眼的測試頁面。</p>
+  <div class="sidebar">
+    <a href="index.html" style="display: inline-block; margin-top: 0.8rem; padding: 0.4rem 0.8rem; background-color: #dbeada; color: #333; text-decoration: none; border-radius: 6px;">← 回首頁</a>
+    <a href="world.html" style="display: inline-block; margin-top: 0.8rem; margin-bottom: 0.8rem; padding: 0.4rem 0.8rem; background-color: #dbeada; color: #333; text-decoration: none; border-radius: 6px;">← 回世界之眼</a>
+    <div class="keyword">地球公民</div>
+    <div class="keyword">連結</div>
+    <div class="keyword">貢獻</div>
+    <div class="keyword">參與</div>
+    <div class="keyword">合作</div>
+  </div>
+
+  <div class="main-content">
+    <header>
+  <h1>看見自己，關照社會</h1>
+  <p>在虛無之中出生，連生物都算不上；不進入社會，就不算是個人</p>
+</header>
+
+    <p>我會在這裡放一些社會學的思考，不學術，輕鬆交流，描繪共同的願景。</p>
+
+    <img class="issue-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Bike_Taipei_city.jpg/1024px-Bike_Taipei_city.jpg" alt="台北市腳踏車街景" />
+
+    <p>透過社會學的視角，我能夠反思自己在社會運作中的位置，這促使我質疑既有的社會樣貌，試圖尋求改變的可能性，從而在探索過程中形成更加全面的世界觀與社會責任感。</p>
+
+    <div class="comment-box">
+      <h3>議題交流區</h3>
+      <p>寫下你從社會學視角看到的觀察與疑問。</p>
+      <form onsubmit="submitComment(); return false;">
+        <textarea id="commentInput" rows="3" style="width: 100%; padding: 0.5rem;"></textarea>
+        <button type="submit" style="margin-top: 0.5rem;">送出留言</button>
+      </form>
+      <div id="commentsContainer" style="margin-top: 1rem;"></div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+<script>
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCiLok6LzotXqPMKBj07ampugFtlBtdWcM",
+  authDomain: "myfirstintroweb.firebaseapp.com",
+  projectId: "myfirstintroweb",
+  storageBucket: "myfirstintroweb.firebasestorage.app",
+  messagingSenderId: "587649490529",
+  appId: "1:587649490529:web:d028a44e2ca0c66a925420"
+};
+
+// 初始化 Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const auth = firebase.auth();
+
+  // 匿名登入並開始監聽留言
+  auth.onAuthStateChanged(user => {
+    if (!user) {
+      auth.signInAnonymously().catch(console.error);
+    } else {
+      listenForComments(); // 登入後監聽留言
+    }
+  });
+
+  function listenForComments() {
+    const container = document.getElementById("commentsContainer");
+    db.collection("comments_world")
+      .orderBy("timestamp", "desc")
+      .onSnapshot(snapshot => {
+        container.innerHTML = "";
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const div = document.createElement("div");
+          div.className = "comment";
+          div.textContent = data.content;
+          container.appendChild(div);
+        });
+      });
+  }
+
+  // 提交留言
+  function submitComment() {
+    const content = document.getElementById("commentInput").value.trim();
+    if (!content) return;
+
+    db.collection("comments_world").add({
+      content,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+      document.getElementById("commentInput").value = "";
+    });
+  }
+</script>
+
+  
 </body>
 </html>
