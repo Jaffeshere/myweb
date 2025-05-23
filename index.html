@@ -54,17 +54,18 @@
   border-radius: 12px;
 }
 
-.left-section {
-  margin-bottom: 2rem;  /* 強制間距 */
+.right-section {
+  flex: 50;
   background-color: #fff;
+  padding: 2rem 2rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(80, 100, 90, 0.05);
-  padding: 2rem; /* 保留適當內距 */
-}
-
-/* 最後一個 section 不要多餘底部間距 */
-.left-section:last-child {
-  margin-bottom: 0;
+  height: fit-content;
+  flex-basis: 500px;
+  height: fit-content;
+  max-width: 500px;       /* 限制最大寬度 */
+  overflow-x: hidden;     /* 隱藏水平滾動，避免外溢 */
+  box-sizing: border-box; /* 包含padding計算寬度 */
 }
 
     .section h2 {
