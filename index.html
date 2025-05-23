@@ -129,6 +129,42 @@
       font-size: 0.9rem;
       color: #999;
     }
+
+.topic-section {
+  display: flex;
+  justify-content: flex-end; /* 右對齊整個區塊 */
+  padding: 2rem 0;
+  background-color: inherit; /* 跟其他區塊一樣背景 */
+}
+
+.topic-container {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem;
+  scroll-snap-type: x mandatory;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.topic-card {
+  flex: 0 0 auto;
+  min-width: 180px;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  scroll-snap-align: start;
+  transition: transform 0.2s;
+}
+
+.topic-card:hover {
+  transform: translateY(-4px);
+}
+    
   </style>
 </head>
 <body>
@@ -197,6 +233,17 @@
          
   <div id="commentsContainer">
     
+  </div>
+</section>
+
+    <section class="topic-section">
+  <h2>議題探索</h2>
+  <div class="topic-container">
+    <a class="topic-card" href="society.html">社會學之眼</a>
+    <a class="topic-card" href="ecology.html">生態之眼</a>
+    <a class="topic-card" href="university.html">大學生之眼</a>
+    <a class="topic-card" href="traveler.html">旅人之眼</a>
+    <a class="topic-card" href="world.html">世界之眼</a>
   </div>
 </section>
 
