@@ -162,26 +162,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 
 <script>
-
-<script>
-  document.querySelectorAll('.keyword').forEach(button => {
-    button.addEventListener('click', () => {
-      const topic = button.dataset.topic;
-
-      // 隱藏所有內容
-      document.querySelectorAll('.topic-content').forEach(div => {
-        div.style.display = 'none';
-      });
-
-      // 顯示對應內容
-      const target = document.querySelector(`.topic-content[data-topic="${topic}"]`);
-      if (target) {
-        target.style.display = 'block';
-      }
-    });
-  });
-</script>
-  
+ 
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCiLok6LzotXqPMKBj07ampugFtlBtdWcM",
@@ -234,6 +215,24 @@ const firebaseConfig = {
       document.getElementById("commentInput").value = "";
     });
   }
+
+  document.querySelectorAll('.keyword').forEach(button => {
+    button.addEventListener('click', () => {
+      const topic = button.dataset.topic;
+
+      // 隱藏所有內容
+      document.querySelectorAll('.topic-content').forEach(div => {
+        div.style.display = 'none';
+      });
+
+      // 顯示對應內容
+      const target = document.querySelector(`.topic-content[data-topic="${topic}"]`);
+      if (target) {
+        target.style.display = 'block';
+      }
+    });
+  });
+  
 </script>
 
   
