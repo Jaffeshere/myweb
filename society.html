@@ -2,11 +2,118 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>社會學之眼</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>議題頁面 - 騎行台北</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", sans-serif;
+      background-color: #fafafa;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 200px;
+      background-color: #f2f2f2;
+      padding: 1rem;
+      border-right: 2px solid #dbeada;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .keyword {
+      background-color: #e7f1e7;
+      border-left: 4px solid #b4dab5;
+      margin-bottom: 0.8rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: #555;
+      font-size: 1rem;
+    }
+
+    .issue-image {
+      max-width: 100%;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+    }
+
+    .comment-box {
+      margin-top: 3rem;
+      background-color: #f8f8f8;
+      padding: 1rem;
+      border-radius: 12px;
+      border-left: 4px solid #d0e9d2;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 2px solid #dbeada;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>社會學之眼</h1>
-  <p>這是社會學之眼的測試頁面。</p>
+  <div class="sidebar">
+    <div class="keyword">城市觀察</div>
+    <div class="keyword">身體感</div>
+    <div class="keyword">公共空間</div>
+    <div class="keyword">感官經驗</div>
+    <div class="keyword">流動性</div>
+  </div>
+
+  <div class="main-content">
+    <header>
+      <h1>騎行台北：感官下的城市流動</h1>
+      <p>在都市中騎腳踏車不只是移動，而是一次身體與環境互動的旅程。</p>
+    </header>
+
+    <p>你是否曾在下班時段踩上腳踏車，穿梭於台北擁擠又熟悉的街道？這不僅是移動的過程，更是每一刻與聲音、氣味、風速的對話。在移動的身體中，我們感知城市的節奏與表情。</p>
+
+    <img class="issue-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Bike_Taipei_city.jpg/1024px-Bike_Taipei_city.jpg" alt="台北市腳踏車街景" />
+
+    <p>城市空間對騎士友善與否，不只關乎交通設計，更深層反映出政策與價值觀。哪些區域讓人感到自在？哪些地方讓人屏息以對？這些感官的回憶，是城市治理的隱形註腳。</p>
+
+    <div class="comment-box">
+      <h3>留言交流區</h3>
+      <p>歡迎分享你在城市騎行中的感官經驗、觀察或提問。</p>
+      <form onsubmit="submitComment(); return false;">
+        <textarea id="commentInput" rows="3" style="width: 100%; padding: 0.5rem;"></textarea>
+        <button type="submit" style="margin-top: 0.5rem;">送出留言</button>
+      </form>
+      <div id="commentsContainer" style="margin-top: 1rem;"></div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK 和留言程式碼請根據你原本的版本掛載 -->
 </body>
 </html>
-
