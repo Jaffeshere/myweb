@@ -96,11 +96,11 @@
   <div class="sidebar">
     <a href="index.html" style="display: inline-block; margin-top: 0.8rem; padding: 0.4rem 0.8rem; background-color: #dbeada; color: #333; text-decoration: none; border-radius: 6px;">← 回首頁</a>
     <a href="society.html" style="display: inline-block; margin-top: 0.8rem; margin-bottom: 0.8rem; padding: 0.4rem 0.8rem; background-color: #dbeada; color: #333; text-decoration: none; border-radius: 6px;">← 回社會學之眼</a>
-    <div class="keyword">教育</div>
-    <div class="keyword">性別</div>
-    <div class="keyword">科技</div>
-    <div class="keyword">階級</div>
-    <div class="keyword">反身性</div>
+    <button class="keyword" data-topic="education">教育</button>
+    <button class="keyword" data-topic="gender">性別</button>
+    <button class="keyword" data-topic="technology">科技</button>
+    <button class="keyword" data-topic="class">階級</button>
+    <button class="keyword" data-topic="reflexivity">反身性</button>
   </div>
 
   <div class="main-content">
@@ -115,6 +115,36 @@
 
     <p>透過社會學的視角，我能夠反思自己在社會運作中的位置，這促使我質疑既有的社會樣貌，試圖尋求改變的可能性，從而在探索過程中形成更加全面的世界觀與社會責任感。</p>
 
+    <div class="topic-content" data-topic="education">
+      <h2>教育與社會流動</h2>
+      <img class="issue-image" src="education.jpg" alt="教育圖" />
+      <p>教育常被視為向上流動的管道，但實際上制度可能複製不平等...</p>
+    </div>
+
+    <div class="topic-content" data-topic="gender" style="display: none;">
+      <h2>性別與權力</h2>
+      <img class="issue-image" src="gender.jpg" alt="性別圖" />
+      <p>性別不只是個人認同，也是一種社會規訓...</p>
+    </div>
+
+<div class="topic-content" data-topic="technology">
+      <h2>科技與霸權</h2>
+      <img class="issue-image" src="education.jpg" alt="教育圖" />
+      <p>科技工具不完全中性，有時是偽裝成平等的霸權</p>
+    </div>
+
+    <div class="topic-content" data-topic="class" style="display: none;">
+      <h2>階級與區判</h2>
+      <img class="issue-image" src="gender.jpg" alt="性別圖" />
+      <p>階級不只經濟面</p>
+    </div>
+
+    <div class="topic-content" data-topic="reflexivity" style="display: none;">
+      <h2>反身性思考</h2>
+      <img class="issue-image" src="gender.jpg" alt="性別圖" />
+      <p>我站在社會中的哪個位置，做出這些思考</p>
+    </div>
+    
     <div class="comment-box">
       <h3>議題交流區</h3>
       <p>寫下你從社會學視角看到的觀察與疑問。</p>
@@ -133,6 +163,25 @@
 
 <script>
 
+<script>
+  document.querySelectorAll('.keyword').forEach(button => {
+    button.addEventListener('click', () => {
+      const topic = button.dataset.topic;
+
+      // 隱藏所有內容
+      document.querySelectorAll('.topic-content').forEach(div => {
+        div.style.display = 'none';
+      });
+
+      // 顯示對應內容
+      const target = document.querySelector(`.topic-content[data-topic="${topic}"]`);
+      if (target) {
+        target.style.display = 'block';
+      }
+    });
+  });
+</script>
+  
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCiLok6LzotXqPMKBj07ampugFtlBtdWcM",
