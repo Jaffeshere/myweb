@@ -305,18 +305,6 @@
   // 初始化 Firebase
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
-
-// 匿名登入機制
-  firebase.auth().onAuthStateChanged(user => {
-    if (!user) {
-      firebase.auth().signInAnonymously().catch(error => {
-        console.error("匿名登入失敗", error);
-      });
-    } else {
-      initCommentListener();
-    }
-  });
-
   
   // 避免重複監聽（確保只初始化一次）
  let unsubscribe;
