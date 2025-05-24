@@ -25,13 +25,22 @@
     }
 
     .keyword {
-      background-color: #e7f1e7;
-      border-left: 4px solid #b4dab5;
-      margin-bottom: 0.8rem;
-      padding: 0.5rem 0.8rem;
-      border-radius: 6px;
-      font-size: 0.95rem;
-    }
+  background-color: #e7f1e7;
+  border: none;
+  border-left: 4px solid #b4dab5;
+  margin-bottom: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.keyword:hover {
+  background-color: #d8e9d9;
+}
 
     .main-content {
       flex: 1;
@@ -77,6 +86,9 @@
       word-break: break-word;
     }
 
+    .topic-content {
+      display: none;
+    }
 
     @media (max-width: 768px) {
       body {
@@ -96,11 +108,11 @@
   <div class="sidebar">
     <a href="index.html" style="display: inline-block; margin-top: 0.8rem; padding: 0.4rem 0.8rem; background-color: #dbeada; color: #333; text-decoration: none; border-radius: 6px;">← 回首頁</a>
     <a href="world.html" style="display: inline-block; margin-top: 0.8rem; margin-bottom: 0.8rem; padding: 0.4rem 0.8rem; background-color: #dbeada; color: #333; text-decoration: none; border-radius: 6px;">← 回世界之眼</a>
-    <div class="keyword">地球公民</div>
-    <div class="keyword">連結</div>
-    <div class="keyword">貢獻</div>
-    <div class="keyword">參與</div>
-    <div class="keyword">合作</div>
+    <button class="keyword" data-topic="citizen">地球公民</botton>
+    <button class="keyword" data-topic="connection">連結</botton>
+    <button class="keyword" data-topic="contribution">貢獻</botton>
+    <button class="keyword" data-topic="advocate">參與</botton>
+    <button class="keyword" data-topic="collab">合作</botton>
   </div>
 
   <div class="main-content">
@@ -115,6 +127,36 @@
 
     <p>透過社會學的視角，我能夠反思自己在社會運作中的位置，這促使我質疑既有的社會樣貌，試圖尋求改變的可能性，從而在探索過程中形成更加全面的世界觀與社會責任感。</p>
 
+<div class="topic-content" data-topic="citizen">
+      <h2>地球公民的義務與機會</h2>
+      <img class="issue-image" src="education.jpg" alt="教育圖" />
+      <p>超越個人、族群、國家，我們同是地球公民</p>
+    </div>
+
+    <div class="topic-content" data-topic="connection">
+      <h2>當起橋樑走進世界</h2>
+      <img class="issue-image" src="gender.jpg" alt="性別圖" />
+      <p>串聯起孤島，在汪洋中遠航</p>
+    </div>
+
+<div class="topic-content" data-topic="contribution">
+      <h2>貢獻作為公民行動</h2>
+      <img class="issue-image" src="education.jpg" alt="教育圖" />
+      <p>當你一無所有時，貢獻吧</p>
+    </div>
+
+    <div class="topic-content" data-topic="advocate">
+      <h2>成為世界的一份子</h2>
+      <img class="issue-image" src="gender.jpg" alt="性別圖" />
+      <p>找到自己在世界上的角色</p>
+    </div>
+
+    <div class="topic-content" data-topic="collab">
+      <h2>牽起手圍起地球</h2>
+      <img class="issue-image" src="gender.jpg" alt="性別圖" />
+      <p>地球人有的共同福祉與願景</p>
+    </div>
+    
     <div class="comment-box">
       <h3>議題交流區</h3>
       <p>寫下你從社會學視角看到的觀察與疑問。</p>
@@ -185,6 +227,24 @@ const firebaseConfig = {
       document.getElementById("commentInput").value = "";
     });
   }
+
+ document.querySelectorAll('.keyword').forEach(button => {
+    button.addEventListener('click', () => {
+      const topic = button.dataset.topic;
+
+      // 隱藏所有內容
+      document.querySelectorAll('.topic-content').forEach(div => {
+        div.style.display = 'none';
+      });
+
+      // 顯示對應內容
+      const target = document.querySelector(`.topic-content[data-topic="${topic}"]`);
+      if (target) {
+        target.style.display = 'block';
+      }
+    });
+  });
+  
 </script>
 
   
