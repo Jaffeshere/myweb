@@ -25,13 +25,22 @@
     }
 
     .keyword {
-      background-color: #e7f1e7;
-      border-left: 4px solid #b4dab5;
-      margin-bottom: 0.8rem;
-      padding: 0.5rem 0.8rem;
-      border-radius: 6px;
-      font-size: 0.95rem;
-    }
+  background-color: #e7f1e7;
+  border: none;
+  border-left: 4px solid #b4dab5;
+  margin-bottom: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.keyword:hover {
+  background-color: #d8e9d9;
+}
 
     .main-content {
       flex: 1;
@@ -77,6 +86,9 @@
       word-break: break-word;
     }
 
+    .topic-content {
+      display: none;
+    }
 
     @media (max-width: 768px) {
       body {
@@ -96,28 +108,58 @@
   <div class="sidebar">
     <a href="index.html" style="display: inline-block; margin-top: 0.8rem; padding: 0.4rem 0.8rem; background-color: #dbeada; color: #333; text-decoration: none; border-radius: 6px;">← 回首頁</a>
     <a href="ecology.html" style="display: inline-block; margin-top: 0.8rem; margin-bottom: 0.8rem; padding: 0.4rem 0.8rem; background-color: #dbeada; color: #333; text-decoration: none; border-radius: 6px;">← 回生態之眼</a>
-    <div class="keyword">森林</div>
-    <div class="keyword">野生動物</div>
-    <div class="keyword">都市生態</div>
-    <div class="keyword">永續共榮</div>
-    <div class="keyword">生態心理學</div>
+     <button class="keyword" data-topic="forest">森林</button>
+     <button class="keyword" data-topic="animal">野生動物</button>
+     <button class="keyword" data-topic="eco-urban">都市生態</button>
+     <button class="keyword" data-topic="sustainibility">永續共榮</button>
+     <button class="keyword" data-topic=ecophy">生態心理學</button>
   </div>
 
   <div class="main-content">
     <header>
-  <h1>看見自己，關照社會</h1>
-  <p>在虛無之中出生，連生物都算不上；不進入社會，就不算是個人</p>
+  <h1>地球一體，生物共榮</h1>
+  <p>別忘本，人在物種多樣性裡的位置區區一點不值一提</p>
 </header>
 
-    <p>我會在這裡放一些社會學的思考，不學術，輕鬆交流，描繪共同的願景。</p>
+    <p>我會在這裡放一些自然生態的思考，不學術，輕鬆交流，描繪共同的願景。</p>
 
     <img class="issue-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Bike_Taipei_city.jpg/1024px-Bike_Taipei_city.jpg" alt="台北市腳踏車街景" />
 
     <p>透過社會學的視角，我能夠反思自己在社會運作中的位置，這促使我質疑既有的社會樣貌，試圖尋求改變的可能性，從而在探索過程中形成更加全面的世界觀與社會責任感。</p>
 
+<div class="topic-content" data-topic="forest">
+      <h2>森林與全球生態</h2>
+      <img class="issue-image" src="education.jpg" alt="教育圖" />
+      <p>不只是地球之肺的森林還能做甚麼</p>
+    </div>
+
+    <div class="topic-content" data-topic="animal">
+      <h2>野生動物的禮物</h2>
+      <img class="issue-image" src="gender.jpg" alt="性別圖" />
+      <p>作一個保有野性的現代人</p>
+    </div>
+
+<div class="topic-content" data-topic="eco-urban">
+      <h2>都市中的自然生態</h2>
+      <img class="issue-image" src="education.jpg" alt="教育圖" />
+      <p>都市裡除了人，還有一些野生鄰居</p>
+    </div>
+
+    <div class="topic-content" data-topic="sustainibility">
+      <h2>永續共榮願景</h2>
+      <img class="issue-image" src="gender.jpg" alt="性別圖" />
+      <p>文明永續，地球永續，生命永續</p>
+    </div>
+
+    <div class="topic-content" data-topic="ecophy">
+      <h2>生態心理學</h2>
+      <img class="issue-image" src="gender.jpg" alt="性別圖" />
+      <p>斷開與蓋亞的連結，人是孤獨無根的</p>
+    </div>
+    
     <div class="comment-box">
       <h3>議題交流區</h3>
-      <p>寫下你從社會學視角看到的觀察與疑問。</p>
+      <p>寫下你從生態視角看到的觀察與疑問。</p>
       <form onsubmit="submitComment(); return false;">
         <textarea id="commentInput" rows="3" style="width: 100%; padding: 0.5rem;"></textarea>
         <button type="submit" style="margin-top: 0.5rem;">送出留言</button>
